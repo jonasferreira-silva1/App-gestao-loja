@@ -1,0 +1,35 @@
+{
+  "name": "app-gestao-loja-semijoias",
+  "version": "1.0.0",
+  "description": "Assistente conversacional no Telegram e Gestão da Loja de Semijoias",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "keywords": [
+    "telegram-bot",
+    "semijoias",
+    "gestao",
+    "typescript",
+    "better-sqlite3",
+    "zod"
+  ],
+  "author": "Jonas Ferreira Silva",
+  "license": "MIT",
+  "dependencies": {
+    "better-sqlite3": "^11.3.0",
+    "dotenv": "^16.4.5",
+    "telegraf": "^4.16.3",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.11",
+    "@types/node": "^20.16.5",
+    "ts-node-dev": "^2.0.0",
+    "typescript": "^5.6.2",
+    "vitest": "^2.1.1"
+  }
+}

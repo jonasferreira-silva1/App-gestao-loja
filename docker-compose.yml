@@ -1,0 +1,17 @@
+services:
+  app-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: semijoias-gestao-bot
+    restart: unless-stopped
+    environment:
+      - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
+      - DB_PATH=/app/data/database.sqlite
+      - NODE_ENV=production
+    volumes:
+      - sqlite_data:/app/data
+
+volumes:
+  sqlite_data:
+    driver: local
