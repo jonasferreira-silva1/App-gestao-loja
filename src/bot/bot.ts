@@ -1,8 +1,11 @@
 import { Telegraf } from 'telegraf';
 import { env } from '../config/env.js';
 import { handleAjudaCommand } from './handlers/ajuda.js';
+import { handleCadastrarCommand } from './handlers/cadastrar.js';
 import { handlePingCommand } from './handlers/ping.js';
+import { handleProdutosCommand } from './handlers/produtos.js';
 import { handleStartCommand } from './handlers/start.js';
+import { handleVendaMessage } from './handlers/venda.js';
 
 let botInstance: Telegraf | null = null;
 
@@ -20,6 +23,11 @@ export function createBot(): Telegraf {
   bot.command('start', handleStartCommand);
   bot.command('ping', handlePingCommand);
   bot.command('ajuda', handleAjudaCommand);
+  bot.command('cadastrar', handleCadastrarCommand);
+  bot.command('produtos', handleProdutosCommand);
+
+  // Handler de mensagens de texto livre (registros de venda)
+  bot.on('text', handleVendaMessage);
 
   // Captura erros globais no Bot
   bot.catch((err, ctx) => {

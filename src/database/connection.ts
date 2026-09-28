@@ -7,9 +7,8 @@ let dbInstance: Database.Database | null = null;
 
 /**
  * Retorna a instância ativa do banco de dados SQLite.
- * Se a conexão ainda não tiver sido estabelecida, ela será inicializada.
  * 
- * @param customPath Caminho opcional para o banco de dados (útil para testes em memória ou temporários)
+ * @param customPath Caminho opcional para o banco de dados
  */
 export function getDatabase(customPath?: string): Database.Database {
   if (dbInstance) {
@@ -18,7 +17,6 @@ export function getDatabase(customPath?: string): Database.Database {
 
   const targetPath = customPath || env.DB_PATH;
 
-  // Garante que o diretório pai do banco de dados exista (ex: ./data/)
   if (targetPath !== ':memory:') {
     const dir = path.dirname(targetPath);
     if (!fs.existsSync(dir)) {
@@ -26,7 +24,6 @@ export function getDatabase(customPath?: string): Database.Database {
     }
   }
 
-  // Cria a conexão SQLite com suporte a modo WAL para melhor performance
   dbInstance = new Database(targetPath);
   dbInstance.pragma('journal_mode = WAL');
   dbInstance.pragma('foreign_keys = ON');
@@ -36,7 +33,6 @@ export function getDatabase(customPath?: string): Database.Database {
 
 /**
  * Inicializa a estrutura de tabelas do banco de dados caso ainda não existam.
- * Modelo de dados inicial cobrindo Produtos, Vendas e Notas Fiscais.
  */
 export function initDatabase(db?: Database.Database): void {
   const connection = db || getDatabase();
@@ -53,12 +49,13 @@ export function initDatabase(db?: Database.Database): void {
     );
   `);
 
-  // Tabela de Vendas
+  // Tabela de Vendas (com suporte a quantidade vendida)
   connection.exec(`
     CREATE TABLE IF NOT EXISTS vendas (
       id INTEGER PRIMARY KEY AUTOINCREMENT,
       produto_id INTEGER NOT NULL,
       valor_venda REAL NOT NULL,
+      quantidade INTEGER NOT NULL DEFAULT 1,
       forma_pagamento TEXT NOT NULL,
       data_hora DATETIME DEFAULT CURRENT_TIMESTAMP,
       FOREIGN KEY (produto_id) REFERENCES produtos(id)
