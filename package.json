@@ -2,9 +2,10 @@
   "name": "app-gestao-loja-semijoias",
   "version": "1.0.0",
   "description": "Assistente conversacional no Telegram e Gestão da Loja de Semijoias",
+  "type": "module",
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
+    "dev": "tsx watch src/index.ts",
     "build": "tsc",
     "start": "node dist/index.js",
     "test": "vitest run"
@@ -29,6 +30,7 @@
     "@types/better-sqlite3": "^7.6.11",
     "@types/node": "^20.16.5",
     "ts-node-dev": "^2.0.0",
+    "tsx": "^4.23.15",
     "typescript": "^5.6.2",
     "vitest": "^2.1.1"
   }
