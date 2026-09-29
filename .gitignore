@@ -28,6 +28,7 @@ data/
 # IDEs e Editores
 .vscode/
 .idea/
+.kiro/
 *.swp
 *.swo
 

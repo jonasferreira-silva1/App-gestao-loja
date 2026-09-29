@@ -20,8 +20,11 @@ export async function handleAjudaCommand(ctx: Context): Promise<void> {
     `• Envie mensagem no formato:\n` +
     `  _venda / colar dourado / 45 / pix_\n` +
     `  _venda / anel / 35 / cartão / 2_ (com quantidade)\n\n` +
-    `🚀 *Em breve (Sprint 3):*\n` +
-    `• /fechamento - Relatório financeiro e margem de lucro do dia`;
+    `📊 *Relatórios:*\n` +
+    `• /fechamento - Relatório financeiro do dia (lucro, margem, campeão)\n` +
+    `  _/fechamento 25/12/2024_ (data específica)\n\n` +
+    `🚀 *Em breve (Sprint 4 — OCR):*\n` +
+    `• Envie foto de Nota Fiscal para extração automática de custos`;
 
   await ctx.replyWithMarkdownV2(
     mensagem.replace(/([._\-!#()+=])/g, '\\$1')
